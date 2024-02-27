@@ -44,6 +44,10 @@ Before running the script, ensure the following:
 - The script utilizes the `subprocess` module to interact with the system commands and OpenSSL for decryption.
 - It employs the SQLite library to connect to the login data databases of Opera GX and Google Chrome.
 
+## Known Issues
+
+- Will get an SQLITE database locked error, mitigate this by closing the Chromium Apps themselves
+
 ## Disclaimer
 
 This script is intended for educational and personal use only. Do not use it for any unauthorized or malicious activities. The retrieval of passwords without user consent is against ethical guidelines. Use it responsibly and only on your own accounts.

