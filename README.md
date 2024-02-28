@@ -19,7 +19,7 @@ Before running the script, ensure the following:
    ```
 
 2. **Execution:**
-  After the executable has been generated, you can either right click to execute it, or in the terminal ```./executable```
+  After the executable has been generated, you can either right click to execute it, or in the terminal ```./executable```, it should be in your ```/dist``` directory.
 
 ## Screenshots
 
