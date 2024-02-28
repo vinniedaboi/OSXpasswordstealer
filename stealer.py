@@ -24,11 +24,19 @@ chromepid = (
 
 chromepid = chromepid.decode('utf-8').split()
 
-os.system(f"kill -9 {operapid[0]}")
+subprocess.Popen(
+    ['kill', "-9", operapid[0]],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+)
 
 time.sleep(1)
 
-os.system(f"kill -9 {chromepid[0]}")
+subprocess.Popen(
+    ['kill', "-9", chromepid[0]],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+)
 
 time.sleep(1)
 
