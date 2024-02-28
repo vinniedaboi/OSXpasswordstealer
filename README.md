@@ -12,18 +12,14 @@ Before running the script, ensure the following:
 ## Usage
 
 1. **Run the Script:**
-   Open a terminal and run the script by executing the following command:
+   Open a terminal and run the builder script by executing the following command:
 
    ```bash
-   python stealer.py
+   python builder.py
    ```
 
-2. **View Decrypted Passwords:**
-    The script will print decrypted login information for both Opera GX and Google Chrome, including the website, username, and password.
-
-    For Opera GX passwords, it uses the com.operasoftware.OperaGX profile.
-    For Chrome passwords, it looks for profiles in com.google.Chrome.
-    The script pauses for 1 second between displaying each set of credentials.
+2. **Execution:**
+  After the executable has been generated, you can either right click to execute it, or in the terminal ```./executable```
 
 ## Screenshots
 
