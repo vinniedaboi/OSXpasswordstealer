@@ -25,6 +25,20 @@ Before running the script, ensure the following:
     For Chrome passwords, it looks for profiles in com.google.Chrome.
     The script pauses for 1 second between displaying each set of credentials.
 
+## Screenshots
+
+### Discord
+
+![Sending to Discord Hook](discord.png)
+
+### Local
+
+![Printing Locally](local.png)
+
+### Builder
+
+![Builder](builder.png)
+
 ## How It Works
 
 1. **Locate Login Data Files:**
